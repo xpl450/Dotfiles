@@ -26,6 +26,8 @@ NeoBundle 'mboughaba/i3config.vim'
 NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'edkolev/promptline.vim'
 NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'chrisbra/Colorizer'
+NeoBundle 'vim-scripts/Vimball'
 
 " Required:
 call neobundle#end()
@@ -58,6 +60,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
+" Colorizer config
+let g:colorizer_auto_color = 1
+
 " Normal Configurations
 set termguicolors
 colorscheme jellybeans
@@ -80,4 +85,3 @@ aug i3config_ft_detection
   au!
   au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
 aug end
-
