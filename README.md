@@ -7,7 +7,7 @@ Put the files in the appropriate folders.
 Rofi configs: ~/.config/rofi/themes/(theme.rasi) <---- Theme file
 ~/.config/rofi/config.rasi <---- Main config file
 
-i3-gaps: ~/.config/i3/config or ~/.i3/config
+i3-gaps: [~/.config/i3/config] or ~/.i3/config
 
 alacritty: ~/.config/alacritty/alacritty.yml
 
