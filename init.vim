@@ -1,44 +1,55 @@
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  " Required:
-  set runtimepath+=/home/joshua/.config/nvim/bundle/neobundle.vim/
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
 " Required:
-call neobundle#begin(expand('/home/joshua/.config/nvim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-NeoBundle 'ryanoasis/vim-devicons'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'dense-analysis/ale'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'neoclide/coc.nvim'
-NeoBundle 'nvim-treesitter/nvim-treesitter'
-NeoBundle 'mboughaba/i3config.vim'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'edkolev/promptline.vim'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'chrisbra/Colorizer'
-NeoBundle 'vim-scripts/Vimball'
+set runtimepath+=/home/xev/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call neobundle#end()
+call dein#begin('/home/xev/.cache/dein')
+
+" Let dein manage dein
+" Required:
+call dein#add('/home/xev/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+" Add or remove your plugins here like this:
+" Snippets
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
+
+" Theming
+call dein#add('nvim-lualine/lualine.nvim')
+call dein#add('kyazdani42/nvim-web-devicons')
+call dein#add('olivercederborg/poimandres.nvim')
+
+" Little bells and whistles
+call dein#add('nvim-treesitter/nvim-treesitter', {'hook_post_update': 'TSUpdate'})
+call dein#add('lukas-reineke/indent-blankline.nvim')
+call dein#add('chribra/Colorizer')
+call dein#add('mboughaba/i3config.vim')
+
+" Tools for development
+call dein#add('tpope/vim-fugitive')
+call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'release' })
+call dein#add('vim-scripts/Vimball')
+
+" Explorers
+call dein#add('kyazdani42/nvim-tree.lua')
+
+" Required:
+call dein#end()
 
 " Required:
 filetype plugin indent on
+syntax enable
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
+"End dein Scripts-------------------------
 
 " Mappings for tabs
 map <F1> :bprevious<Return>
@@ -55,17 +66,29 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" Airline Config
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+" Indent-line config
+source ~/.config/nvim/indent-blankline.lua
+
+" Lualine Config
+source ~/.config/nvim/lualine.lua
+
+" Devicons config
+lua << END
+require('nvim-web-devicons').setup()
+END
+
+lua << END
+require("nvim-tree").setup()
+END
+
+" Options
+source ~/.config/nvim/options.lua
 
 " Colorizer config
 let g:colorizer_auto_color = 1
 
 " Normal Configurations
-set termguicolors
-colorscheme jellybeans
+colorscheme poimandres
 set number
 set cursorline
 set noshowmode
@@ -73,7 +96,7 @@ set noshowmode
 " Treesitter config
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    ensure_installed = {'python', 'cpp', 'c', 'go', 'rust', 'lua'}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
   },
